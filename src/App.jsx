@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Inputs from "./components/inputs";
-import Context from "./context";
+import Inputs from "./components/Inputs/Inputs";
+import Header from "./components/Header/Header";
+import './style/App.css'
 
 function App() {
   const [inputsValues, setInputsValues] = useState([
     { id: Math.random(), key: undefined, value: undefined },
   ])
- 
 
   function createInputs() {
     if (inputsValues.every(elem => elem.key)) {
@@ -37,11 +37,12 @@ function App() {
   }
 
   return (
-    <Context.Provider value={{ removeInputs, changeKey, changeValue }}>
-      <div className="App">
-        <Inputs inputsValues={inputsValues} onToggle={createInputs} />
+    <div className="App">
+      <Header />
+      <div className="content">
+        <Inputs inputsValues={inputsValues} onCreate={createInputs} remove={removeInputs} cK={changeKey} cV={changeValue} />
       </div>
-    </Context.Provider>
+    </div>
   );
 }
 
